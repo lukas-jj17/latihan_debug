@@ -13,13 +13,15 @@ class matakuliah extends Seeder
      */
     public function run(): void
     {
-        ModelsMatakuliah::factory()->create([
+        ModelsMatakuliah::firstOrCreate([
             'kode' => 'ST0001',
+        ], [
             'nama_matakuliah' => 'Pemograman Web Dasar'
         ]);
 
-        ModelsMatakuliah::factory()->create([
+        ModelsMatakuliah::firstOrCreate([
             'kode' => 'ST0002',
+        ], [
             'nama_matakuliah' => 'Pemograman Web Lanjutan'
         ]);
     }

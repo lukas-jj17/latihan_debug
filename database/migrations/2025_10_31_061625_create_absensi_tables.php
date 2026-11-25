@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('tanggal_absensi');
             $table->enum('status_absen', ['A', 'H', 'I', 'S']);
             $table->timestamps();
-            $table->unique(['mahasiswa_id', 'matakuliah_id', 'tanggal_absensi');
+            $table->unique(['mahasiswa_id', 'matakuliah_id', 'tanggal_absensi']);
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absensi_tables');
+        Schema::dropIfExists('absensis');
     }
 };

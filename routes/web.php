@@ -4,8 +4,22 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', [AbsensiController::class, 'index']);
+
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::middleware('auth')->group(function(){
+
+
+Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');    
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 Route::get('/mata-kuliah', [MataKuliahController::class, 'index'])->name('matkul.index');
 Route::get('/mata-kuliah/create', [MataKuliahController::class, 'create'])->name('matkul.create');
@@ -24,3 +38,4 @@ Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name(
 Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
 Route::get('/absensi/create', [AbsensiController::class, 'create'])->name('absensi.create');
 Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');
+});

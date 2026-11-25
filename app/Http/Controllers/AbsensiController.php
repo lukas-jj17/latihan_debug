@@ -72,20 +72,22 @@ class AbsensiController extends Controller
     {
         $request->validate([
             'tanggal_absensi' => 'required|date',
-            'matakuliah' => 'required|exists:matakuliah,id',
-            'status' => 'nullable|required|array',
-            'status.*' => 'nullable|in:HAIS',
+            'matakuliah_id' => 'required|exists:matakuliah,id',
+            'status' => 'nullable|array',
+            'status.*' => 'nullable|in:H,A,I,S',
         ]);
 
         $statuses = $request->input('status', []);
 
         foreach ($statuses as $mahasiswaId => $statusAbsen) {
             if (in_array($statusAbsen, ['H', 'A', 'I', 'S'])) {
-                Absensi::Create(
+                Absensi::updateOrCreate(
                     [
                         'mahasiswa_id' => (string) $mahasiswaId,
-                        'matakuliah_id' => (string) $request->matakuliah,
+                        'matakuliah_id' => (string) $request->matakuliah_id,
                         'tanggal_absensi' => $request->tanggal_absensi,
+                    ],
+                    [
                         'status_absen' => $statusAbsen,
                     ]
                 );

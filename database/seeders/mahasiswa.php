@@ -13,21 +13,24 @@ class mahasiswa extends Seeder
      */
     public function run(): void
     {
-        ModelsMahasiswa::factory()->create([
+        ModelsMahasiswa::firstOrCreate([
             'NIM' => '0001',
-            'nama' => 'Saya',
+        ], [
+            'name' => 'Saya',
             'jurusan' => 'Sistem dan Teknologi Informasi'
         ]);
 
-        ModelsMahasiswa::factory()->create([
+        ModelsMahasiswa::firstOrCreate([
             'NIM' => '0002',
-            'nama' => 'Kamu',
+        ], [
+            'name' => 'Kamu',
             'jurusan' => 'Sistem dan Teknologi Informasi'
         ]);
 
-        ModelsMahasiswa::factory()->create([
+        ModelsMahasiswa::firstOrCreate([
             'NIM' => '0003',
-            'nama' => 'Dia',
+        ], [
+            'name' => 'Dia',
             'jurusan' => 'Sistem dan Teknologi Informasi'
         ]);
     }
